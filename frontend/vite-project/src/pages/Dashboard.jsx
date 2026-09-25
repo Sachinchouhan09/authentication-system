@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Dashboard.css";
@@ -7,37 +8,41 @@ const Dashboard = () => {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-useEffect(() => {
-  const getUser = async () => {
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch(
+          "https://authentication-system-ek19.onrender.com/api/auth/me",
+          {
+            credentials: "include",
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setUser(data.user);
+        } else {
+          navigate("/login");
+        }
+      } catch (error) {
+        navigate("/login");
+      }
+    };
+
+    getUser();
+  }, [navigate]);
+
+  const handleLogout = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/me",
+      await fetch(
+        "https://authentication-system-ek19.onrender.com/api/auth/logout",
         {
+          method: "POST",
           credentials: "include",
         }
       );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setUser(data.user);
-      } else {
-        navigate("/login");
-      }
-    } catch (error) {
-      navigate("/login");
-    }
-  };
-
-  getUser();
-}, [navigate]);
-  
-  const handleLogout = async () => {
-    try {
-      await fetch("http://localhost:5000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
 
       navigate("/login");
     } catch (error) {
@@ -66,3 +71,4 @@ useEffect(() => {
 };
 
 export default Dashboard;
+

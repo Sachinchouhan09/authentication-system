@@ -1,3 +1,4 @@
+
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -11,10 +12,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://authentication-system-gules.vercel.app",
     credentials: true,
-  }),
+  })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -29,7 +31,6 @@ mongoose
   .then(() => {
     console.log("MongoDB connected");
   })
-
   .catch((error) => {
     console.log("MongoDB connection was failed");
     console.log(error.message);
@@ -40,3 +41,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
+
