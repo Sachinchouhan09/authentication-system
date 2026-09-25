@@ -67,8 +67,8 @@ router.post("/login", async (req, res) => {
   });
   res.cookie("token", token, {
     httpOnly: true,
-    samesite: "strict",
-    secure: false,
+    samesite: "none",
+    secure: true,
   });
 
   res.json({
@@ -86,7 +86,11 @@ router.get("/me", authMiddleware, async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token",{
+       httpOnly: true,
+    sameSite: "none",
+    secure: true
+  });
 
   res.json({
     message: "logout successfull",
