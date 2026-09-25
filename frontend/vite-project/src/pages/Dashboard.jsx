@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Dashboard.css";
@@ -12,12 +11,9 @@ const Dashboard = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(
-          "https://authentication-system-ek19.onrender.com/api/auth/me",
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch("/api/auth/me", {
+          credentials: "include",
+        });
 
         const data = await response.json();
 
@@ -36,13 +32,10 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch(
-        "https://authentication-system-ek19.onrender.com/api/auth/logout",
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
 
       navigate("/login");
     } catch (error) {
@@ -59,9 +52,7 @@ const Dashboard = () => {
           <h2>Welcome, {user.username}</h2>
           <p>Email: {user.email}</p>
 
-          <button onClick={handleLogout}>
-            Logout
-          </button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       )}
 
@@ -71,4 +62,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

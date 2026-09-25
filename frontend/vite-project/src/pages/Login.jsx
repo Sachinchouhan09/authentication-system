@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-       "https://authentication-system-ek19.onrender.com/api/auth/login" ,
+"/api/auth/login",
         {
           method: "POST",
           headers: {
