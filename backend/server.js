@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://authentication-system-gules.vercel.app",
+    origin:"https://authentication-system-green.vercel.app" ,
     credentials: true,
   })
 );
