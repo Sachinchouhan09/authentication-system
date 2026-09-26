@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
+import "../css/Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -23,7 +23,7 @@ const Register = () => {
   }
 
   try {
-    const response = await fetch("/api/auth/register", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -18,20 +18,17 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(
-"/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
       const data = await response.json();
 
@@ -40,7 +37,6 @@ const Login = () => {
       if (response.ok) {
         navigate("/dashboard");
       }
-
     } catch (error) {
       setMessage("Something went wrong");
     }
@@ -48,9 +44,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-
       <form className="login-form" onSubmit={handleLogin}>
-
         <h1>Login</h1>
 
         <input
@@ -69,14 +63,10 @@ const Login = () => {
           autoComplete="current-password"
         />
 
-        <button type="submit">
-          Login
-        </button>
-
+        <button type="submit">Login</button>
       </form>
 
       <p className="login-message">{message}</p>
-
     </div>
   );
 };
